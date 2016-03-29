@@ -8,7 +8,7 @@ public class RadomAiPlayer extends Player {
     public RadomAiPlayer(Statas colour){
         super(colour);
     }
-    public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls){
+    public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls,Triangle[] bord){
         Random random= new Random();
         int rnd = random.nextInt(posMoves.size());
         move=posMoves.get(rnd);

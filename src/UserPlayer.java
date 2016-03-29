@@ -20,10 +20,10 @@ public class UserPlayer extends Player {
             System.out.println(roll);
         }
     }
-    public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls){
+    public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls,Triangle[] bord){
         dissRolls(rolls);
         dissPossMoves(posMoves);
-        Move move =super.evaluate(posMoves,rolls);
+        Move move =super.evaluate(posMoves,rolls,bord);
         if(move==null){
             System.out.println("Invalid Move Please Enter a valid Move");
         }

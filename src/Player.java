@@ -12,12 +12,14 @@ import java.util.Set;
 public abstract class Player {
     public Move move;
     public Statas colour;
+    public Triangle[] bord;
     public Player(Statas colour){
         this.colour=colour;
     }
     public int boreOff;
 
     public boolean doMove(Triangle[] bord)throws Exception{
+
         ArrayList<Move> possMoves;
         int roll1=roll(),roll2=roll();
         Move move=null;
@@ -27,7 +29,7 @@ public abstract class Player {
         for(int i =0;i<size;i++) {
             possMoves = getPossMove(bord, rolls);
             while (move == null && !possMoves.isEmpty()) {
-                move = evaluate(possMoves, rolls);
+                move = evaluate(possMoves, rolls,bord);
             }
             if (move != null) {
                 move.execute(bord);
@@ -51,7 +53,7 @@ public abstract class Player {
             System.out.println(roll);
         }
     }
-    public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls){
+    public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls,Triangle[] bord){
         Move move =getMove();
         for(Move possMove:posMoves){
             if(move.start==possMove.start&&move.end==possMove.end){
@@ -80,23 +82,6 @@ public abstract class Player {
                     if(move!=null){
                         posMove.add(move);
                     }
-//                    if ((end >= 0 && end <= 25)&&(start >= 1&&start <= 24)) {
-//                        if (bord[end].getStatas() == colour.getopp() && bord[end].getPieces() == 1) {
-//                            move = new TakeMove(start, end, colour, roll);
-//                        } else if (bord[end].getStatas() == colour || bord[end].getStatas() == Statas.EMPTY) {
-//                            if(end==25||end==0){
-//                                move=new BearMove(start,end,colour,roll)
-//                            }
-//
-//
-//                            move = new NormalMove(start, end, colour, roll);
-//                        }
-//                        if (move != null) {
-//                            posMove.add(move);
-//
-//                        }
-//                    }
-
                 }
             }
         }
