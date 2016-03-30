@@ -6,6 +6,7 @@ import java.util.Random;
  */
 public class AiPlayer extends Player {
     public String name="player";
+    public String getName(){return name;}
     public AiPlayer(Statas colour) {
         super(colour);
     }
@@ -75,10 +76,14 @@ public class AiPlayer extends Player {
         }
 
     }
-    public Move Rnd(ArrayList<Move> bestMoves){
+    public Move rndBest(ArrayList<Move> bestMoves){
         Random random= new Random();
         int rnd = random.nextInt(bestMoves.size());
         return bestMoves.get(rnd);
+
+    }
+    public int disFrom(int endpoint, int startPoint){
+        return Math.abs(startPoint-endpoint);
 
     }
 //    public int checkTotal(int max, int total){

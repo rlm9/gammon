@@ -5,6 +5,7 @@ import java.util.ArrayList;
  */
 public class AiAnd extends AiPlayer {
     public String name="And";
+    public String getName(){return name;}
     public AiAnd(Statas colour){
         super(colour);
     }
@@ -12,18 +13,20 @@ public class AiAnd extends AiPlayer {
         int max=0;
         int total=0;
         Move best=null;
+        dissRolls(rolls);
+        dissPossMoves(posMoves);
         for(Move move:posMoves){
             total=0;
 
             total+=movePriorty(move,300,200,100);
 
-            if(total>max){
+            if(total>=max){
                 best=move;
                 max=total;
             }
 
         }
-       // rolls.remove(new Integer(best.roll));
+        rolls.remove(new Integer(best.roll));
         return best;
     }
 }

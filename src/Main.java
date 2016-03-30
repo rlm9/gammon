@@ -1,8 +1,11 @@
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.SimpleTimeZone;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Created by Ruari on 24/03/2016.
@@ -50,9 +53,9 @@ import java.util.logging.Logger;
                 @Override public java.io.PrintStream append(char c) { return this; }
             });
             int redwins=0,whitewinss=0;
-            for(int i=0;i<10000;i++){
-                player_1 = new AiAnd(Statas.RED);
-                player_2 = new AiBob(Statas.WHITE);
+            for(int i=0;i<1000;i++){
+                player_1 = new AiBob(Statas.RED);
+                player_2 = new AiAnd(Statas.WHITE);
                 Player curentPLayer;
                 if(i%2==0){
                     curentPLayer = player_2;
@@ -84,7 +87,7 @@ import java.util.logging.Logger;
                 }
             }
             try {
-                fh = new FileHandler("text.txt");
+                fh = new FileHandler("text.txt",true);
             }
             catch (Exception e){
                 System.out.println("file prob");
@@ -94,7 +97,10 @@ import java.util.logging.Logger;
             //System.out.println(redwins+ "    r w    "+whitewinss);
 
             log.addHandler(fh);
-            log.info(redwins+ " "+player_1.name+ "r vs w"+player_2.name+ "   "    +whitewinss);
+             SimpleFormatter sf = new SimpleFormatter();
+            fh.setFormatter(sf);
+            log.info(redwins+ " "+player_1.getName()+ " "+player_1.colour.getText()+" vs " +player_2.getName()+ " "+player_2.colour.getText()+" " +whitewinss+"\n");
+
         }
         public static Triangle[] setBoard(){
             Triangle[] bord=new Triangle[26];
