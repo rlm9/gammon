@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.SimpleTimeZone;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 /**
@@ -8,9 +9,11 @@ import java.util.logging.Logger;
  */
     public class Main {
         public static final Logger log=Logger.getLogger(Main.class.getName());
-        public static ConsoleHandler cs=new ConsoleHandler();
+        public static FileHandler fh;
         public static void main(String[] args){
           //  Player player_1=setPlayer(Statas.WHITE);
+            Player player_1=null;
+            Player player_2=null;
             System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
                 @Override public void write(int b) {}
             }) {
@@ -47,10 +50,16 @@ import java.util.logging.Logger;
                 @Override public java.io.PrintStream append(char c) { return this; }
             });
             int redwins=0,whitewinss=0;
-            for(int i=0;i<=1000;i++){
-                Player player_1 = new RadomAiPlayer(Statas.WHITE);
-                Player player_2 = new AiPeter(Statas.RED);
-                Player curentPLayer = player_2;
+            for(int i=0;i<10000;i++){
+                player_1 = new AiAnd(Statas.RED);
+                player_2 = new AiBob(Statas.WHITE);
+                Player curentPLayer;
+                if(i%2==0){
+                    curentPLayer = player_2;
+                }else {
+                    curentPLayer = player_1;
+                }
+
                 boolean game = true;
                 Triangle[] board = setBoard();
                 display(board);
@@ -74,9 +83,18 @@ import java.util.logging.Logger;
                     System.out.println("wtf");
                 }
             }
-            log.addHandler(cs);
-            log.info(redwins+ "    r w    "+whitewinss);
-            System.out.println(redwins+ "    r w    "+whitewinss);
+            try {
+                fh = new FileHandler("text.txt");
+            }
+            catch (Exception e){
+                System.out.println("file prob");
+            }
+           // log.addHandler(cs);
+
+            //System.out.println(redwins+ "    r w    "+whitewinss);
+
+            log.addHandler(fh);
+            log.info(redwins+ " "+player_1.name+ "r vs w"+player_2.name+ "   "    +whitewinss);
         }
         public static Triangle[] setBoard(){
             Triangle[] bord=new Triangle[26];

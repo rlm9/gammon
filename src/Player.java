@@ -10,6 +10,7 @@ import java.util.Set;
  * Created by Ruari on 23/03/2016.
  */
 public abstract class Player {
+    public String name;
     public Move move;
     public Statas colour;
     public Triangle[] bord;
@@ -144,9 +145,5 @@ public abstract class Player {
     public int getEndIndex(Statas colour){
         return (int)(12.5*(colour.getDir()+1));
     }
-
-
-
-
 
 }
