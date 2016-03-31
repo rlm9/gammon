@@ -16,7 +16,7 @@ import java.util.logging.SimpleFormatter;
     public static FileHandler fh;
 
     public static void main(String[] args) {
-        //  Player player_1=setPlayer(Statas.WHITE);df
+        //  Player player_1=setPlayer(Statas.WHITE);dfde
         Player player_1 = setPlayer(1,Statas.RED);
         Player player_2 = setPlayer(2, Statas.WHITE);
 //            Player player_2= new AiSteve(Statas.RED);
