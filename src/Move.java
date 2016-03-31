@@ -17,6 +17,7 @@ public class Move {
         this.end=end;
       //  this.colour=colour;
       //  this.valid=false;
+
       /////  this.roll=roll;
     }
     public boolean validateMove(ArrayList<Move> posMoves, ArrayList<Integer> rolls){
@@ -51,6 +52,13 @@ public class Move {
         if(triangle.getPieces()==0){
             triangle.setStatus(Statas.EMPTY);
         }
+
+    }
+    public void undo(Triangle[] bord){
+        Triangle triangle=bord[start];
+        triangle.add();
+        triangle.setStatus(colour);
+
 
     }
     public int getEdgeIndex(){
