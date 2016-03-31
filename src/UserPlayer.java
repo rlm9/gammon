@@ -10,7 +10,8 @@ public class UserPlayer extends Player {
     public void dissPossMoves(ArrayList<Move> moves){
         System.out.println("you could make the following moves");
         for(Move move:moves){
-            System.out.println(move.start + " to "+ move.end);
+            System.out.print(move.start + " to "+ move.end+" ");
+            System.out.println(move.getClass().getSimpleName());
         }
     }
 

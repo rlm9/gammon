@@ -19,8 +19,9 @@ public class AiAnd extends AiPlayer {
             total=0;
 
             total+=movePriorty(move,300,200,100);
+            total+=disFrom(getEndIndex(colour.getopp()),move.start);
 
-            if(total>=max){
+            if(total>max){
                 best=move;
                 max=total;
             }

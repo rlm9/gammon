@@ -18,7 +18,9 @@ public class AiTheWhale extends AiPlayer {
             total=0;
 
             total+=movePriorty(move,300,200,100);
+            total+=disFrom(getEndIndex(colour.getopp()),move.end);
             total+=disFrom(getEndIndex(colour.getopp()),move.start);
+
             if(total>max){
                 bestMoves.clear();
                 bestMoves.add(move);

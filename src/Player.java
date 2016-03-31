@@ -74,12 +74,8 @@ public abstract class Player {
         int end;
         ArrayList<Move> posMove= new ArrayList<>();
         Set<Integer> uniqueRolls=new HashSet<Integer>(rolls);
-       // getEndIndex(colour.getopp())+1;
-        int what =getEndIndex(colour.getopp())+colour.getDir();
-        int reallywhat =getEndIndex(colour)-colour.getDir();
-       // for(int start=getEndIndex(colour.getopp())+colour.getDir(),stop = getEndIndex(colour)-colour.getDir();start<=stop;start+=colour.getDir()){
         for (int start = getEndIndex(colour.getopp()) + colour.getDir(), count = 0; count < 24; count++, start+= colour.getDir()) {
-            System.out.println(start+colour.getText());
+          //  System.out.println(start+colour.getText());
             if(bord[start].getStatas()==colour){
                 for(Integer roll: uniqueRolls) {
 
