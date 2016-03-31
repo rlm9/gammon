@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 /**
  * Created by Ruari on 30/03/2016.
@@ -34,20 +35,30 @@ public class AiSear extends AiSteve {
         int total=0;
         Move best=null;
         ArrayList<Move> bestMoves=new ArrayList<>();
+        dissRolls(rolls);
+        dissPossMoves(posMoves);
+
         for(Move move:posMoves) {
 
             total+=evaluateValue(move,bord);
             //Triangle[] newBord=bord.clone();
-            Triangle[] newBord= Arrays.copyOf(bord,bord.length);
-            move.execute(newBord);
+            move.execute(bord);
+            Main.display(bord);
+            System.out.println(move.start+"to"+move.end);
             rolls.remove(new Integer(move.roll));
+            for(Integer roll:rolls){
+
+            }
             if(!rolls.isEmpty()) {
-                Move followMove = evaluate(getPossMove(newBord, rolls), rolls, newBord);
+                Move followMove = evaluate(getPossMove(bord, rolls), rolls, bord);
                 if(followMove!=null) {
-                    total += evaluateValue(followMove, newBord);
+                    total += evaluateValue(followMove, bord);
                 }
             }
             rolls.add((move.roll));
+            move.undo(bord);
+            Main.display(bord);
+            System.out.println(move.end+"to"+move.start);
 
             if(total>max) {
 //                bestMoves.clear();

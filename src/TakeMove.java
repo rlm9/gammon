@@ -23,5 +23,20 @@ public class TakeMove extends Move{
         }
 
     }
+    public void undo(Triangle[] bord){
+        super.execute(bord);
+        Triangle triangle=bord[end];
+        triangle.setStatus(colour.getopp());
+        int bordEdge= getEdgeIndex();//gets the index of the starting point for each
+        for(int i= bordEdge;;i-=colour.getDir()) {
+            if(bord[i].getStatas()!=colour){
+                bord[i].remove();
+               if(bord[i].getPieces()==0){
+                   bord[i].setStatus(Statas.EMPTY);
+               }
+                break;
+            }
+        }
+    }
 
 }

@@ -4,6 +4,7 @@
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OnlinePlayer extends Player {
@@ -23,16 +24,17 @@ public class OnlinePlayer extends Player {
         final int port = 50230;
         try {
             final String hostname = InetAddress.getLocalHost().getHostName();
+            System.out.println(hostname);
         } catch (UnknownHostException ex) {
             System.out.println(ex);
         }
 
         String[] poss = {"client", "server"};
         String type = "";
-        type = Main.getString("Are you the client or the server?", poss, "Please enter a valid option");
+        //type = Main.getString("Are you the client or the server?", poss, "Please enter a valid option");
         hostName = getString("enter the host you wish to connect to", null, "Please Enter valid input");
         try {
-            if (type.equals("server")) {
+            if (type.equals("wait")) {
 
                 // create listening socket
                 this.colour=Statas.WHITE;
@@ -86,8 +88,14 @@ public class OnlinePlayer extends Player {
             }
 
         }
-
-
         return userIn;
+    }
+    public int roll(){
+
+    }
+    public void getMessage(){
+        String in = scanner.nextLine();
+        System.out.println(in);
+
     }
 }

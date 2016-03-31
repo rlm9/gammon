@@ -16,5 +16,15 @@ public class NormalMove extends Move {
         triangle.setStatus(colour);
 
     }
+    public void  undo(Triangle[] bord){
+        super.undo(bord);
+        Triangle triangle=bord[end];
+        triangle.remove();
+        if(triangle.getPieces()==0){
+            triangle.setStatus(Statas.EMPTY);
+
+        }
+    }
+
 }
 
