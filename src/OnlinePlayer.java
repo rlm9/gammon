@@ -13,55 +13,50 @@ public class OnlinePlayer extends Player {
     final String newgame = "newgame";
     final String reject = "reject";
     final String ready = "ready";
-    private ServerSocket socketIn;
+    private ServerSocket socketServer;
+    private Socket socket;
+    private Scanner scanner;
+    private PrintWriter writer;
     public OnlinePlayer(Statas colour) {
-
         super(colour);
-
-        final String port = "50230";
+        String hostName;
+        final int port = 50230;
         try {
             final String hostname = InetAddress.getLocalHost().getHostName();
-        }catch(UnknownHostException ex){
+        } catch (UnknownHostException ex) {
             System.out.println(ex);
         }
 
         String[] poss = {"client", "server"};
         String type = "";
         type = Main.getString("Are you the client or the server?", poss, "Please enter a valid option");
-        if(type.equals("client")){
-            static void startup()
-            {
+        hostName = getString("enter the host you wish to connect to", null, "Please Enter valid input");
+        try {
+            if (type.equals("server")) {
+
                 // create listening socket
-                try {
-                    socketIn = new ServerSocket(Numbers.chatPort);
-                    socketIn.setSoTimeout(Numbers.soTimeout);
-                }
-                catch (IOException e) {
-                    error("server failed! " + e.getClass().getName());
-                    System.exit(-1);
-                }
-                // local input
-                InetAddress h;+
-                String s = "(unknown)";
-                try {
-                    h = InetAddress.getLocalHost();
-                    s = h.getCanonicalHostName();
-                    report("host: " + h.getByName(s));
-                }
-                catch (UnknownHostException e) {
-                    s = "(unknown)";
-                    error("startup(): cannot get hostname!");
-                }
-                report("port: " + socketIn.getLocalPort());
-                report("ready ...");
+                this.colour=Statas.WHITE;
+                socketServer = new ServerSocket(port);
+                socketServer.setSoTimeout(300000);
+                socket = socketServer.accept();
 
-                _state = ChatState.idle;
+                System.out.println("Connection Timeout");
+                System.exit(-1);
+
+            } else if (type.equals("client")) {
+                this.colour=Statas.RED;
+                socket = new Socket(hostName, port);
+
             }
-
-        }else if(type.equals("server")){
-
+            scanner = new Scanner(socket.getInputStream());
+            writer = new PrintWriter(socket.getOutputStream());
+        }catch (java.net.SocketException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }catch (java.io.IOException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-
     }
 
 
