@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.SimpleTimeZone;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
@@ -16,8 +17,10 @@ import java.util.logging.SimpleFormatter;
 
     public static void main(String[] args) {
         //  Player player_1=setPlayer(Statas.WHITE);
-        Player player_1 = null;
-        Player player_2 = null;
+        Player player_1 = setPlayer(1,Statas.RED);
+        Player player_2 = setPlayer(2, Statas.WHITE);
+//            Player player_2= new AiSteve(Statas.RED);
+//            Player player_1= new UserPlayer(Statas.WHITE);
 //        System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
 //            @Override
 //            public void write(int b) {
@@ -154,16 +157,16 @@ import java.util.logging.SimpleFormatter;
 //                return this;
 //            }
 //        });
-        int redwins = 0, whitewinss = 0;
-        for (int i = 0; i < 10000; i++) {
-            player_2 = new AiSear(Statas.WHITE);
-            player_1 = new UserPlayer(Statas.RED);
-            Player curentPLayer;
-            if (i % 2 == 0) {
-                curentPLayer = player_1;
-            } else {
-                curentPLayer = player_2;
-            }
+//        int redwins = 0, whitewinss = 0;
+//        for (int i = 0; i < 10000; i++) {
+//            player_2 = new AiSear(Statas.WHITE);
+//            player_1 = new UserPlayer(Statas.RED);
+            Player curentPLayer=player_1;
+//            if (i % 2 == 0) {
+//                curentPLayer = player_1;
+//            } else {
+//                curentPLayer = player_2;
+//            }
             boolean game = true;
             Triangle[] board = setBoard();
             display(board);
@@ -177,16 +180,16 @@ import java.util.logging.SimpleFormatter;
                 }
                 System.out.println("congrats, " + curentPLayer.colour.getText() + " is the winner");
                 if (curentPLayer.colour == Statas.RED) {
-                    redwins++;
+                //    redwins++;
                 } else {
-                    whitewinss++;
+                //    whitewinss++;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 e.getMessage();
                 System.out.println("wtf");
             }
-        }
+
         try {
             fh = new FileHandler("text.txt", true);
         } catch (Exception e) {
@@ -196,10 +199,11 @@ import java.util.logging.SimpleFormatter;
 
         //System.out.println(redwins+ "    r w    "+whitewinss);
 
-        log.addHandler(fh);
-        SimpleFormatter sf = new SimpleFormatter();
-        fh.setFormatter(sf);
-        log.info(redwins + " red " + player_1.getName() + " " + player_1.getClass().getSimpleName() + " vs white " + player_2.getName() + " " + player_2.getClass().getSimpleName() + " " + whitewinss + "\n");
+//        log.addHandler(fh);
+//        SimpleFormatter sf = new SimpleFormatter();
+//        SimpleFormatter sf = new SimpleFormatter();
+//        fh.setFormatter(sf);
+      //  log.info(redwins + " red " + player_1.getName() + " " + player_1.getClass().getSimpleName() + " vs white " + player_2.getName() + " " + player_2.getClass().getSimpleName() + " " + whitewinss + "\n");
 
     }
 
@@ -211,10 +215,65 @@ import java.util.logging.SimpleFormatter;
         return bord;
     }
 
-    public static Player setPlayer(Statas colour) {
+    public static Player setPlayer(int num,Statas colour) {
+        String type;
+        String[] types = {"ai", "user", "online"};
+        type = getString("What is Player " + num + "?\n AI, User or Online?", types,"Please Enter a Valid type");
+        if(type.equals("user")){
+            return new UserPlayer(colour);
+        }else if (type.equals("online")){
+            return new OnlinePlayer(colour);
+        }else if(type.equals("ai")){
+            String aiType = "";
+            String[] ai = {"and", "bob", "noah", "peter", "sear", "steve", "thewhale"};
+            aiType = getString("Which AI is Player " + num + "? And, Bob, Noah, Peter, Sear, Steve or TheWhale?" , ai, "Please enter a valid AI");
+            if(aiType.equals("And")){
+                return new AiAnd(colour);
+            }else if(aiType.equals("bob")){
+                return new AiBob(colour);
+            }else if(aiType.equals("noah")){
+                return new AiNoah(colour);
+            }else if(aiType.equals("peter")){
+                return new AiPeter(colour);
+            }else if(aiType.equals("sear")){
+                return new AiSear(colour);
+            }else if(aiType.equals("steve")){
+                return new AiSteve(colour);
+            }else if(aiType.equals("thewhale")){
+                return new AiTheWhale(colour);
+            }
+        }
 
         return new UserPlayer(colour);//in the actual code this would obviously ask for the type of player required, could be done via the gui if we wana fo that
     }
+
+    public static String getString(String mess, String[] poss,String errMess){
+        Boolean error=true;
+        String userIn = "";
+        Scanner scan = new Scanner(System.in);
+        while(error) {//loops until a valid number is entered
+            try {
+                System.out.println(mess);
+
+                userIn= scan.nextLine();
+                if(userIn.equals("exit")){
+                    System.exit(1);
+                }
+                for(String pos:poss){
+                    if(pos.equals(userIn.toLowerCase())){
+                        error=false;
+                    }
+                }
+
+            }catch (java.util.InputMismatchException e){
+                System.out.println(e);
+                scan.nextLine();//this makes scanner read next input again, as without it would keep returning the first number
+            }
+
+        }
+        return userIn.toLowerCase();
+    }
+
 
     public static void display(Triangle[] board) {
 
@@ -254,7 +313,7 @@ import java.util.logging.SimpleFormatter;
         }
         //Find max value of counters on a single place
         int max = 0;
-        for (int i = 0; i < arrayCopy.length; i++) {
+        for (int i = 1; i < arrayCopy.length-1; i++) {
             if (arrayCopy[i] > max) {
                 max = arrayCopy[i];
             }
