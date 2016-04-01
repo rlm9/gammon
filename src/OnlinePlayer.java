@@ -145,6 +145,7 @@ return 3;
         if(test==1){
             System.out.println("will be pass");
         }
+        marker.reset();
         System.out.println(scanner.nextLine());
 
         System.out.println(test);
