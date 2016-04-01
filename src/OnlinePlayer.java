@@ -78,10 +78,22 @@ public class OnlinePlayer extends Player {
         return userIn;
     }
     public int roll(){
-return 3;
+        return 3;
+    }
+    public Move getMove(){
+        return null;
     }
     public void getMessage(){
         String in = scanner.nextLine();
+        in="4-3:(24|20),(19|16);";
+        String[] parts=in.split(":");
+        for(String each:parts){
+            System.out.println(each);
+        }
+
+        System.exit(1);
+
+       // \\|
         System.out.println(in);
 
     }
@@ -109,14 +121,13 @@ return 3;
         System.out.println("in"+ready);
         if(((int)(1+(Math.random()*2))%2)==0){
             System.out.println("Server Wins First Turn");
-            System.out.println("pass");
+            System.out.println(" out pass");
             writer.println(pass);
         }else {
             System.out.println("You win first Turn");
             writer.println("3-3");
             System.out.println(" out3-3:");
         }
-
 //        marker.mark(1);
 //        int test=marker.read();
 //        System.out.println(test);
@@ -155,6 +166,8 @@ return 3;
             System.out.println(scanner.nextLine());
         }else {
             System.out.println("will be move");
+            marker.reset();
+            System.out.println(scanner.nextLine());
         }
 //        System.out.println(test);
 //        marker.reset();
