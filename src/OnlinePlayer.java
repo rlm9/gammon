@@ -104,8 +104,11 @@ return 3;
         if(!in.equals(ready)){
             throw new IOException("Server did not adhere to protocol");
         }
-        if(((int)Math.random()*2%2)==0){
+        if(((int)(1+(Math.random()*2))%2)==0){
+            System.out.println("Server Wins First Turn");
             writer.println(pass);
+        }else {
+            System.out.println("You win first Turn");
         }
 
         marker.mark(1);
