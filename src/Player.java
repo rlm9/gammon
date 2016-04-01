@@ -19,9 +19,11 @@ public abstract class Player {
         this.colour=colour;
     }
     public int boreOff;
+    public StringBuilder prepareMEss=new StringBuilder();
+    public String prepareMess=null;
 
     public boolean doMove(Triangle[] bord)throws Exception{
-
+        prepareMess="";
         ArrayList<Move> possMoves;
         int roll1=roll(),roll2=roll();
         Move move=null;
@@ -31,14 +33,22 @@ public abstract class Player {
         for(int i =0;i<size;i++) {
             possMoves = getPossMove(bord, rolls);
             while (move == null && !possMoves.isEmpty()) {
+                dissRolls(rolls);
+                dissPossMoves(possMoves);
                 move = evaluate(possMoves, rolls,bord);
             }
             if (move != null) {
+                System.out.println(move.start+ "to "+move.end);
                 move.execute(bord);
-                Main.display(bord);
+                prepareMess+="("+move.start+"|"+move.end+")";
+                //Main.display(bord);
                 move = null;
+            }else {
+                prepareMess+="(-1|-1)";
             }
         }
+        prepareMess=prepareMess.substring(0,prepareMess.length()-1);
+        System.out.println(prepareMess);
         if(bord[getEndIndex(colour)].getPieces()==15){
             return false;
         }
@@ -128,6 +138,7 @@ public abstract class Player {
 
     public ArrayList<Integer> roll(int roll1, int roll2){
         ArrayList<Integer> rolls=new ArrayList<>();
+        prepareMess+=(roll1+"-"+roll2+":");
         if(roll1==roll2){
             for(int i=0;i<4;i++){
                 rolls.add(roll1);
@@ -140,7 +151,7 @@ public abstract class Player {
         return rolls;
     }
 
-    public static int roll(){
+    public  int roll(){
         return (int)((Math.random()*6)+1);
     }
     public int getEndIndex(Statas colour){
