@@ -140,7 +140,7 @@ public abstract class Player {
         return rolls;
     }
 
-    public static int roll(){
+    public int roll(){
         return (int)((Math.random()*6)+1);
     }
     public int getEndIndex(Statas colour){

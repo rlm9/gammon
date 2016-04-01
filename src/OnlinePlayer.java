@@ -14,6 +14,7 @@ public class OnlinePlayer extends Player {
     final String newgame = "newgame";
     final String reject = "reject";
     final String ready = "ready";
+    final int port = 50230;
     private ServerSocket socketServer;
     private Socket socket;
     private Scanner scanner;
@@ -21,7 +22,6 @@ public class OnlinePlayer extends Player {
     public OnlinePlayer(Statas colour) {
         super(colour);
         String hostName;
-        final int port = 50230;
         try {
             final String hostname = InetAddress.getLocalHost().getHostName();
             System.out.println(hostname);
@@ -34,33 +34,10 @@ public class OnlinePlayer extends Player {
         //type = Main.getString("Are you the client or the server?", poss, "Please enter a valid option");
         hostName = getString("enter the host you wish to connect to", null, "Please Enter valid input");
         try {
-            if (type.equals("wait")) {
-
-                // create listening socket
-                this.colour=Statas.WHITE;
-                socketServer = new ServerSocket(port);
-                socketServer.setSoTimeout(300000);
-                socket = socketServer.accept();
-                scanner = new Scanner(socket.getInputStream());
-                writer = new PrintWriter(socket.getOutputStream());
-                writer.println(hello);
-                String in = scanner.nextLine();
-                if(in.equals(hello)){
-                    System.out.println("suces 2");
-                }
-                System.out.println("");
-
-            } else if (type.equals("client")) {
-                this.colour=Statas.RED;
-                socket = new Socket(hostName, port);
-                scanner = new Scanner(socket.getInputStream());
-                writer = new PrintWriter(socket.getOutputStream());
-                String in = scanner.nextLine();
-                if(in.equals(hello)){
-                    System.out.println("suces 1");
-                }
-                System.out.println("in");
-                writer.println(hello);
+            if (hostName.equals("wait")) {
+                setServer();
+            } else {
+                seClinet(hostName);
             }
 
         }catch (java.net.SocketException e){
@@ -71,9 +48,6 @@ public class OnlinePlayer extends Player {
             System.out.println(e.getMessage());
         }
     }
-
-
-
 
     public static String getString(String mess, String[] poss, String errMess) {
         Boolean error = true;
@@ -92,7 +66,7 @@ public class OnlinePlayer extends Player {
 //                        error=false;
 //                    }
 //                }
-
+                error=false;
             } catch (java.util.InputMismatchException e) {
                 System.out.println(e);
                 scan.nextLine();//this makes scanner read next input again, as without it would keep returning the first number
@@ -108,5 +82,32 @@ return 3;
         String in = scanner.nextLine();
         System.out.println(in);
 
+    }
+    public void seClinet(String hostName)throws java.io.IOException{
+        this.colour=Statas.RED;
+        socket = new Socket(hostName, port);
+        scanner = new Scanner(socket.getInputStream());
+        writer = new PrintWriter(socket.getOutputStream(),true);
+        String in = scanner.nextLine();
+        if(in.equals(hello)){
+            System.out.println("suces 1");
+        }
+        System.out.println("in");
+        writer.println(hello);
+    }
+    public void setServer()throws java.io.IOException {
+        this.colour=Statas.WHITE;
+        socketServer = new ServerSocket(port);
+        // socketServer.setSoTimeout(300000);
+        socket = socketServer.accept();
+        System.out.println("woop");
+        scanner = new Scanner(socket.getInputStream());
+        writer = new PrintWriter(socket.getOutputStream(),true);
+        writer.println(hello);
+        String in = scanner.nextLine();
+        if(in.equals(hello)){
+            System.out.println("suces 2");
+        }
+        System.out.println("");
     }
 }
