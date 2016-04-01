@@ -9,11 +9,13 @@ import java.util.Scanner;
 
 public class OnlinePlayer extends Player {
     final String bye = "bye";
+    final String win= "you-win; bye";
     final String hello = "hello";
     final String busy = "busy";
-    final String newgame = "newgame";
+    final String newgame = "New-game";
     final String reject = "reject";
     final String ready = "ready";
+    final String pass = "pass";
     final int port = 50230;
     private ServerSocket socketServer;
     private Socket socket;
@@ -88,11 +90,36 @@ return 3;
         socket = new Socket(hostName, port);
         scanner = new Scanner(socket.getInputStream());
         writer = new PrintWriter(socket.getOutputStream(),true);
-        int test=(socket.getInputStream().read());
+        BufferedInputStream marker=new BufferedInputStream(socket.getInputStream());
+        scanner=new Scanner(marker);
+
+        writer.println(hello);
+
+        String in =scanner.nextLine();
+        if(!in.equals(hello)){
+            throw new IOException("Server did not adhere to protocol");
+        }
+        writer.println(newgame);
+        in=scanner.nextLine();
+        if(!in.equals(ready)){
+            throw new IOException("Server did not adhere to protocol");
+        }
+        if(((int)Math.random()*2%2)==0){
+            writer.println(pass);
+        }
+
+        marker.mark(1);
+        int test=marker.read();
         System.out.println(test);
+        marker.reset();
+        in = scanner.nextLine();
 
 
-        String in = scanner.nextLine();
+
+
+
+
+        System.out.println(in);
         if(in.equals(hello)){
             System.out.println("suces 1");
         }
