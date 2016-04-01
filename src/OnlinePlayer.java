@@ -25,6 +25,7 @@ public class OnlinePlayer extends Player {
     private PrintWriter writer;
 
     public OnlinePlayer(Statas colour) {
+
         super(colour);
         String hostName;
         try {
@@ -101,15 +102,12 @@ public class OnlinePlayer extends Player {
 //
 //    }
 
-    public void getMessage() {
+    public void getMessageIn() {
         String in = scanner.nextLine();
         try {
-
             Move move;
-            in = scanner.nextLine();
-
-            in = "4-3:(24|20),(19|16);";
-
+           // in = scanner.nextLine();
+        //   String in = "4-3:(-1|-1),(-2|-890890);";
             if (in.equals(bye)) {
                 System.out.println("Connection has been closed, exiting program");
                 socket.close();
@@ -120,28 +118,36 @@ public class OnlinePlayer extends Player {
                 System.exit(1);
 
             }
-
-            String[] parts = in.split("[-:;,_]");
-            int roll1 = Integer.parseInt(parts[0]);
-            int roll2 = Integer.parseInt(parts[1]);
+            String[] parts = in.split("[:]");
+            String[] rolls=parts[0].split("[-]");
+            int roll1 = Integer.parseInt(rolls[0]);
+            int roll2 = Integer.parseInt(rolls[1]);
 
             if (!(roll1 <= 6 && roll1 >= 1 && roll2 <= 6 && roll2 >= 1)) {
                 throw new Exception("Roll out of bounds");
             }
 
             rollsIn = super.roll(roll1, roll2);
-
-//            if (parts[0] == parts[1]) {
-//
-//            }
-            for (int i = 2; i < parts.length; i++) {
-                String[] moveArray = parts[i].split("[\\W]");
-                move = new Move(Integer.parseInt(moveArray[1]), Integer.parseInt(moveArray[2]));
+            parts[1]=parts[1].replace(";", "");
+            parts=parts[1].split("[,]");
+            for(String each:parts){
+                each=each.replaceAll("[()]", "");
+                String[] moves=each.split("\\|");
+                move = new Move(Integer.parseInt(moves[0]), Integer.parseInt(moves[1]));
                 movesIn.add(move);
             }
 
+//            for (int i = ; i < parts.length; i++) {
+//                parts[i] = parts[i].replaceAll("[()]", "");
+//                String[] moveArray = parts[i].split("\\|");
+//                System.out.println(parts[i]);
+//                move = new Move(Integer.parseInt(moveArray[0]), Integer.parseInt(moveArray[1]));
+//                movesIn.add(move);
+//            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("test the problem");
             writer.println(bye);
             System.exit(1);
         }
@@ -152,7 +158,7 @@ public class OnlinePlayer extends Player {
         if(Main.mess !=null){
             sendMessage();
         }
-        getMessage();
+        getMessageIn();
         return rollsIn;
     }
 
@@ -190,10 +196,13 @@ public class OnlinePlayer extends Player {
             System.out.println("Server Wins First Turn");
             System.out.println(" out pass");
             writer.println(pass);
+            firstPlayer=true;
         } else {
             System.out.println("You win first Turn");
-            writer.println("3-3");
-            System.out.println(" out3-3:");
+            firstPlayer=false;
+           // writer.println("3-3");
+          //  System.out.println(" out3-3:");
+
         }
     }
 
@@ -224,14 +233,18 @@ public class OnlinePlayer extends Player {
             System.out.println(in);
             if(in.equals(pass)){
                 System.out.println("You Win First Turn");
-                firstPlayer=true;
+                firstPlayer=false;
             }
         } else {
             System.out.println("will be move");
             marker.reset();
             System.out.println("Client wins First Turn");
-            firstPlayer = false;
+            firstPlayer = true;
         }
+    }
+    public void won(){
+        sendMessage();
+
     }
 
 }

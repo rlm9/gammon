@@ -34,8 +34,8 @@ public abstract class Player {
         for(int i =0;i<size;i++) {
             possMoves = getPossMove(bord, rolls);
             while (move == null && !possMoves.isEmpty()) {
-                dissRolls(rolls);
-                dissPossMoves(possMoves);
+            //    dissRolls(rolls);
+              //  dissPossMoves(possMoves);
                 move = evaluate(possMoves, rolls,bord);
             }
             if (move != null) {
@@ -70,6 +70,7 @@ public abstract class Player {
     public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls,Triangle[] bord){
         Move move =getMove();
         for(Move possMove:posMoves){
+           // System.out.println(move + "\t"+ possMove);
             if(move.start==possMove.start&&move.end==possMove.end){
                 move=possMove;
                 rolls.remove(new Integer(move.roll));
@@ -77,6 +78,7 @@ public abstract class Player {
                 return move;
             }
         }
+
         return null;
     }
     public Move getMove(){return null;}

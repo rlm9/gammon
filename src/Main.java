@@ -43,11 +43,13 @@ import java.util.logging.SimpleFormatter;
                     game = curentPLayer.doMove(board);
                 }
                 System.out.println("congrats, " + curentPLayer.colour.getText() + " is the winner");
-                if (curentPLayer.colour == Statas.RED) {
-                //    redwins++;
-                } else {
-                //    whitewinss++;
+                if (curentPLayer == player_1) {
+                    curentPLayer = player_2;
+                } else curentPLayer = player_1;
+                if(curentPLayer instanceof OnlinePlayer){
+                    ((OnlinePlayer) curentPLayer).won();
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 e.getMessage();
@@ -81,7 +83,7 @@ import java.util.logging.SimpleFormatter;
 
     public static Player setPlayer(int num,Statas colour,String[] types) {
         String type;
-        type = getString("What is Player " + num + "?\n AI, User or Online?", types,"Please Enter a Valid type");
+        type = getString("What is Player " + num + "?", types,"Please Enter a Valid type");
         if(type.equals("user")){
             return new UserPlayer(colour);
         }else if (type.equals("online")){
@@ -89,7 +91,7 @@ import java.util.logging.SimpleFormatter;
         }else if(type.equals("ai")){
             String aiType = "";
             String[] ai = {"and", "bob", "noah", "peter", "sear", "steve", "thewhale"};
-            aiType = getString("Which AI is Player " + num + "? And, Bob, Noah, Peter, Sear, Steve or TheWhale?" , ai, "Please enter a valid AI");
+            aiType = getString("Which AI is Player " + num + "?" , ai, "Please enter a valid AI");
             if(aiType.equals("And")){
                 return new AiAnd(colour);
             }else if(aiType.equals("bob")){
@@ -117,7 +119,10 @@ import java.util.logging.SimpleFormatter;
         while(error) {//loops until a valid number is entered
             try {
                 System.out.println(mess);
-
+                for(String pos:poss){
+                    System.out.print(pos + " ");
+                }
+                System.out.println();
                 userIn= scan.nextLine();
                 if(userIn.equals("exit")){
                     System.exit(1);
@@ -184,10 +189,8 @@ import java.util.logging.SimpleFormatter;
         System.out.println();
         //Draws the top half of the board
         for (int io = 0; io < max; io++) {
-
             System.out.print("|");
             for (int i = 13; i < 25; i++) {
-
                 if (arrayCopy[i] > 0) {
                     if (board[i].getStatas() == Statas.RED) {
                         System.out.print(" R  ");
@@ -201,13 +204,10 @@ import java.util.logging.SimpleFormatter;
                 }
             }
             System.out.println("|");
-
         }
-
         for (int i = 0; i <= 49; i++) {
             System.out.print("-");
         }
-
         System.out.println();
         for (int io = 0; io < max; io++) {
             for (int i = 12; i > 0; i--) {
@@ -216,19 +216,14 @@ import java.util.logging.SimpleFormatter;
                 }
                 if (arrayCopy[i] > 0 && (max - arrayCopy[i] == io)) {
                     if (board[i].getStatas() == Statas.RED) {
-//                       System.out.println("arr" + arrayCopy[i] + "io" + io + "max" + max);
                         System.out.print(" R  ");
-
                     } else if (board[i].getStatas() == Statas.WHITE) {
-//                       System.out.println("arr" + arrayCopy[i] + "io" + io + "max" + max);
                         System.out.print(" W  ");
-
                     }
                     arrayCopy[i]--;
                 } else {
                     System.out.print("    ");
                 }
-
             }
             System.out.println("|");
         }
@@ -249,37 +244,4 @@ import java.util.logging.SimpleFormatter;
         System.out.println();
     }
 }
-
-//            int pieces;
-//            String colour;
-//            for(int i0 = 0;i0<4;i0++){
-//                System.out.println("");
-//            }
-//            System.out.println(bord[0].getPieces()+" bore off for red team ");
-//            for(int i = 0;i<26;i++){
-//                pieces = bord[i].getPieces();
-//                colour=bord[i].getStats();
-//                System.out.print("                                                "+i+"-->");
-//                for(int i2=0;i2<pieces;i2++){
-//                    System.out.print(colour);
-//                }
-//                System.out.print("   "+bord[i].getPieces());
-//                System.out.println();
-//            }
-//            System.out.println(bord[25].getPieces()+" bore off for white team ");
-//            System.out.println();
-//            for(int i = 12;i>=0;i--){
-//                pieces=bord[i].getPieces();
-//                if(bord[i].isWhite()){
-//                    colour="w";
-//                }else {colour="R";}
-//
-//                for(int i2=0;i<=pieces;i++){
-//                    System.out.println(colour);
-//                }
-//                for(int i3=pieces;i3<=12;i++){
-//                    System.out.println("O");
-//                }
-//
-//            }
 

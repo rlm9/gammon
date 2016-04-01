@@ -11,7 +11,6 @@ public class TakeMove extends Move{
        super.execute(bord);
         Triangle triangle=bord[end];
         triangle.setStatus(colour);
-
        // triangle=bord[(int)(12.5*(colour.getDir()+1))];
         int bordEdge= getEdgeIndex();//gets the index of the starting point for each
         for(int i= bordEdge;;i-=colour.getDir()) {

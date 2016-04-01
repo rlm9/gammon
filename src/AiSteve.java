@@ -14,8 +14,8 @@ public class AiSteve extends AiPlayer {
         int total=0;
         Move best=null;
         ArrayList<Move> bestMoves=new ArrayList<>();
-        dissRolls(rolls);
-        dissPossMoves(posMoves);
+//        dissRolls(rolls);
+//        dissPossMoves(posMoves);
         for(Move move:posMoves){
             total=evaluateValue(move,bord);
             if(total>max) {

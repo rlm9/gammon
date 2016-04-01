@@ -13,8 +13,7 @@ public class AiBob extends AiPlayer {
         int max=0;
         int total=0;
         Move best=null;
-        dissRolls(rolls);
-        dissPossMoves(posMoves);
+//
         for(Move move:posMoves){
             total=0;
 
@@ -28,6 +27,7 @@ public class AiBob extends AiPlayer {
 
         }
         rolls.remove(new Integer(best.roll));
+        System.out.println("Bob is moving "+best.start + " to " +best.end);
         return best;
     }
 }
