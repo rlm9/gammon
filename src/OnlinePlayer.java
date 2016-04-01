@@ -94,34 +94,40 @@ return 3;
         scanner=new Scanner(marker);
 
         writer.println(hello);
-
+        System.out.println("out"+hello);
         String in =scanner.nextLine();
         if(!in.equals(hello)){
             throw new IOException("Server did not adhere to protocol");
         }
+        System.out.println("in"+hello);
         writer.println(newgame);
+        System.out.println("out"+newgame);
         in=scanner.nextLine();
         if(!in.equals(ready)){
             throw new IOException("Server did not adhere to protocol");
         }
+        System.out.println("in"+ready);
         if(((int)(1+(Math.random()*2))%2)==0){
             System.out.println("Server Wins First Turn");
+            System.out.println("pass");
             writer.println(pass);
         }else {
             System.out.println("You win first Turn");
+            writer.println("3-3");
+            System.out.println(" out3-3:");
         }
 
-        marker.mark(1);
-        int test=marker.read();
-        System.out.println(test);
-        marker.reset();
-        in = scanner.nextLine();
-        System.out.println(in);
-        if(in.equals(hello)){
-            System.out.println("suces 1");
-        }
-        System.out.println("in");
-        writer.println(hello);
+//        marker.mark(1);
+//        int test=marker.read();
+//        System.out.println(test);
+//        marker.reset();
+//        in = scanner.nextLine();
+//        System.out.println(in);
+//        if(in.equals(hello)){
+//            System.out.println("suces 1");
+//        }
+//        System.out.println("in");
+//        writer.println(hello);
     }
     public void setServer()throws java.io.IOException {
         this.colour=Statas.WHITE;
@@ -142,23 +148,21 @@ return 3;
         writer.println(ready);
         marker.mark(1);
         int test=marker.read();
-        if(test==1){
-            System.out.println("will be pass");
-        }
-        marker.reset();
-        System.out.println(scanner.nextLine());
-
         System.out.println(test);
-        marker.reset();
-        in = scanner.nextLine();
-        System.out.println(in);
-
-
-
-
-
-
-
-        System.out.println("");
+        if(test==112) {
+            System.out.println("will be pass");
+            marker.reset();
+            System.out.println(scanner.nextLine());
+        }else {
+            System.out.println("will be move");
+        }
+//        System.out.println(test);
+//        marker.reset();
+//        in = scanner.nextLine();
+//        System.out.println(in);
+//
+//
+//
+//        System.out.println("");
     }
 }
