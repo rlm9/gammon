@@ -38,7 +38,6 @@ public abstract class Player {
                 move = evaluate(possMoves, rolls,bord);
             }
             if (move != null) {
-                System.out.println(move.start+ "to "+move.end);
                 move.execute(bord);
                 prepareMess+="("+move.start+"|"+move.end+")";
                 //Main.display(bord);
