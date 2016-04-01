@@ -40,7 +40,7 @@ public class Triangle {
     }
 
     public Triangle(int start){
-        switch (start){
+        switch (start){//case statement used to set up the board
 
             case 1:
                 pieces=2;

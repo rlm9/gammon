@@ -34,8 +34,6 @@ public abstract class Player {
         for(int i =0;i<size;i++) {
             possMoves = getPossMove(bord, rolls);
             while (move == null && !possMoves.isEmpty()) {
-            //    dissRolls(rolls);
-              //  dissPossMoves(possMoves);
                 move = evaluate(possMoves, rolls,bord);
             }
             if (move != null) {

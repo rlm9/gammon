@@ -9,6 +9,7 @@ public class RadomAiPlayer extends Player {
         super(colour);
     }
     public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls,Triangle[] bord){
+        //random ai
         Random random= new Random();
         int rnd = random.nextInt(posMoves.size());
         Move  move=posMoves.get(rnd);

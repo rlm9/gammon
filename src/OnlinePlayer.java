@@ -167,22 +167,22 @@ public class OnlinePlayer extends Player {
         scanner = new Scanner(marker);
 
         writer.println(hello);
-        System.out.println("out" + hello);
+       // System.out.println("out" + hello);
         String in = scanner.nextLine();
         if (!in.equals(hello)) {
             throw new IOException("Server did not adhere to protocol");
         }
-        System.out.println("in" + hello);
+        //System.out.println("in" + hello);
         writer.println(newgame);
-        System.out.println("out" + newgame);
+       // System.out.println("out" + newgame);
         in = scanner.nextLine();
         if (!in.equals(ready)) {
             throw new IOException("Server did not adhere to protocol");
         }
-        System.out.println("in" + ready);
+        //System.out.println("in" + ready);
         if (((int) (1 + (Math.random() * 2)) % 2) == 0) {
             System.out.println("Server Wins First Turn");
-            System.out.println(" out pass");
+          //  System.out.println(" out pass");
             writer.println(pass);
             firstPlayer=true;
         } else {
@@ -213,8 +213,8 @@ public class OnlinePlayer extends Player {
         writer.println(ready);
         marker.mark(1);
         int test = marker.read();
-        System.out.println(test);
-        if (test == 112) {
+       // System.out.println(test);
+        if (test == 112) {//asco code for p, start of pass protocol
             System.out.println("will be pass");
             marker.reset();
             in=scanner.nextLine();
@@ -222,9 +222,11 @@ public class OnlinePlayer extends Player {
             if(in.equals(pass)){
                 System.out.println("You Win First Turn");
                 firstPlayer=false;
+            }else {
+                throw new IOException("Not move or pass command");
             }
         } else {
-            System.out.println("will be move");
+            //System.out.println("will be move");
             marker.reset();
             System.out.println("Client wins First Turn");
             firstPlayer = true;
@@ -232,7 +234,6 @@ public class OnlinePlayer extends Player {
     }
     public void won(){
         sendMessage();
-
     }
 
 }
