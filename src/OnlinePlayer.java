@@ -75,7 +75,7 @@ public class OnlinePlayer extends Player {
                 error = false;
             } catch (java.util.InputMismatchException e) {
                 System.out.println(e);
-                scan.nextLine();//this makes scanner read next input again, as without it would keep returning the first number
+                scan.nextLine();//this makes scanner read next input again, as without it would keep returning the first numberdf
             }
 
         }
