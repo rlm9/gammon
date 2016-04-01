@@ -20,9 +20,11 @@ public abstract class Player {
     }
     public int boreOff;
     public boolean firstPlayer=true;
+    public StringBuilder prepareMEss=new StringBuilder();
+    public String prepareMess=null;
 
     public boolean doMove(Triangle[] bord)throws Exception{
-
+        prepareMess="";
         ArrayList<Move> possMoves;
         int roll1=roll(),roll2=roll();
         Move move=null;
@@ -32,14 +34,21 @@ public abstract class Player {
         for(int i =0;i<size;i++) {
             possMoves = getPossMove(bord, rolls);
             while (move == null && !possMoves.isEmpty()) {
+                dissRolls(rolls);
+                dissPossMoves(possMoves);
                 move = evaluate(possMoves, rolls,bord);
             }
             if (move != null) {
                 move.execute(bord);
-                Main.display(bord);
+                prepareMess+="("+move.start+"|"+move.end+")";
+                //Main.display(bord);
                 move = null;
+            }else {
+                prepareMess+="(-1|-1)";
             }
         }
+        prepareMess=prepareMess.substring(0,prepareMess.length()-1);
+        System.out.println(prepareMess);
         if(bord[getEndIndex(colour)].getPieces()==15){
             return false;
         }
@@ -76,7 +85,7 @@ public abstract class Player {
         ArrayList<Move> posMove= new ArrayList<>();
         Set<Integer> uniqueRolls=new HashSet<Integer>(rolls);
         for (int start = getEndIndex(colour.getopp()) + colour.getDir(), count = 0; count < 24; count++, start+= colour.getDir()) {
-          //  System.out.println(start+colour.getText());
+          //  System.out.println(start+colour.getText());ws
             if(bord[start].getStatas()==colour){
                 for(Integer roll: uniqueRolls) {
 
@@ -127,17 +136,13 @@ public abstract class Player {
 
     }
 
-    public String parseMove(){
-
-    }
-
     public ArrayList<Integer> roll(int roll1, int roll2){
-            ArrayList<Integer> rolls=new ArrayList<>();
-            if(roll1==roll2){
-                for(int i=0;i<4;i++){
-                    rolls.add(roll1);
-                }
-            }else {
+        ArrayList<Integer> rolls=new ArrayList<>();
+        if(roll1==roll2){
+            for(int i=0;i<4;i++){
+                rolls.add(roll1);
+            }
+        }else {
             rolls.add(roll1);
             rolls.add(roll2);
         }
