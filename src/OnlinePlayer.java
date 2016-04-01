@@ -23,6 +23,7 @@ public class OnlinePlayer extends Player {
     private PrintWriter writer;
     public OnlinePlayer(Statas colour) {
         super(colour);
+        getMessage();
         String hostName;
         try {
             final String hostname = InetAddress.getLocalHost().getHostName();
@@ -84,12 +85,20 @@ public class OnlinePlayer extends Player {
         return null;
     }
     public void getMessage(){
-        String in = scanner.nextLine();
-        in="4-3:(24|20),(19|16);";
-        String[] parts=in.split(":");
+       // String in = scanner.nextLine();
+        String in="4-3:(24|20),(19|16);";
+        String[] parts=in.split("[-:;,_]");
+        System.out.println(parts.length);
         for(String each:parts){
             System.out.println(each);
         }
+
+
+
+
+
+
+
 
         System.exit(1);
 
@@ -128,17 +137,6 @@ public class OnlinePlayer extends Player {
             writer.println("3-3");
             System.out.println(" out3-3:");
         }
-//        marker.mark(1);
-//        int test=marker.read();
-//        System.out.println(test);
-//        marker.reset();
-//        in = scanner.nextLine();
-//        System.out.println(in);
-//        if(in.equals(hello)){
-//            System.out.println("suces 1");
-//        }
-//        System.out.println("in");
-//        writer.println(hello);
     }
     public void setServer()throws java.io.IOException {
         this.colour=Statas.WHITE;
@@ -169,13 +167,5 @@ public class OnlinePlayer extends Player {
             marker.reset();
             System.out.println(scanner.nextLine());
         }
-//        System.out.println(test);
-//        marker.reset();
-//        in = scanner.nextLine();
-//        System.out.println(in);
-//
-//
-//
-//        System.out.println("");
     }
 }
