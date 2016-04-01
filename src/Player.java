@@ -19,6 +19,7 @@ public abstract class Player {
         this.colour=colour;
     }
     public int boreOff;
+    public boolean firstPlayer=true;
 
     public boolean doMove(Triangle[] bord)throws Exception{
 
@@ -126,13 +127,17 @@ public abstract class Player {
 
     }
 
+    public String parseMove(){
+
+    }
+
     public ArrayList<Integer> roll(int roll1, int roll2){
-        ArrayList<Integer> rolls=new ArrayList<>();
-        if(roll1==roll2){
-            for(int i=0;i<4;i++){
-                rolls.add(roll1);
-            }
-        }else {
+            ArrayList<Integer> rolls=new ArrayList<>();
+            if(roll1==roll2){
+                for(int i=0;i<4;i++){
+                    rolls.add(roll1);
+                }
+            }else {
             rolls.add(roll1);
             rolls.add(roll2);
         }

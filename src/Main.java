@@ -22,158 +22,17 @@ import java.util.logging.SimpleFormatter;
         Player player_1 = setPlayer(1,Statas.RED,options1);
         String[] options2={"ai", "user"};
         Player player_2 = setPlayer(2, player_1.colour.getopp(),options2);
-//            Player player_2= new AiSteve(Statas.RED);
-//            Player player_1= new UserPlayer(Statas.WHITE);
-//        System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
-//            @Override
-//            public void write(int b) {
 
-//            }
-//        }) {
-//            @Override
-//            public void flush() {
-//            }
-//
-//            @Override
-//            public void close() {
-//            }
-//
-//            @Override
-//            public void write(int b) {
-//            }
-//
-//            @Override
-//            public void write(byte[] b) {
-//            }
-//
-//            @Override
-//            public void write(byte[] buf, int off, int len) {
-//            }
-//
-//            @Override
-//            public void print(boolean b) {
-//            }
-//
-//            @Override
-//            public void print(char c) {
-//            }
-//
-//            @Override
-//            public void print(int i) {
-//            }
-//
-//            @Override
-//            public void print(long l) {
-//            }
-//
-//            @Override
-//            public void print(float f) {
-//            }
-//
-//            @Override
-//            public void print(double d) {
-//            }
-//
-//            @Override
-//            public void print(char[] s) {
-//            }
-//
-//            @Override
-//            public void print(String s) {
-//            }
-//
-//            @Override
-//            public void print(Object obj) {
-//            }
-//
-//            @Override
-//            public void println() {
-//            }
-//
-//            @Override
-//            public void println(boolean x) {
-//            }
-//
-//            @Override
-//            public void println(char x) {
-//            }
-//
-//            @Override
-//            public void println(int x) {
-//            }
-//
-//            @Override
-//            public void println(long x) {
-//            }
-//
-//            @Override
-//            public void println(float x) {
-//            }
-//
-//            @Override
-//            public void println(double x) {
-//            }
-//
-//            @Override
-//            public void println(char[] x) {
-//            }
-//
-//            @Override
-//            public void println(String x) {
-//            }
-//
-//            @Override
-//            public void println(Object x) {
-//            }
-//
-//            @Override
-//            public java.io.PrintStream printf(String format, Object... args) {
-//                return this;
-//            }
-//
-//            @Override
-//            public java.io.PrintStream printf(java.util.Locale l, String format, Object... args) {
-//                return this;
-//            }
-//
-//            @Override
-//            public java.io.PrintStream format(String format, Object... args) {
-//                return this;
-//            }
-//
-//            @Override
-//            public java.io.PrintStream format(java.util.Locale l, String format, Object... args) {
-//                return this;
-//            }
-//
-//            @Override
-//            public java.io.PrintStream append(CharSequence csq) {
-//                return this;
-//            }
-//
-//            @Override
-//            public java.io.PrintStream append(CharSequence csq, int start, int end) {
-//                return this;
-//            }
-//
-//            @Override
-//            public java.io.PrintStream append(char c) {
-//                return this;
-//            }
-//        });
-//        int redwins = 0, whitewinss = 0;
-//        for (int i = 0; i < 10000; i++) {
-//            player_2 = new AiSear(Statas.WHITE);
-//            player_1 = new UserPlayer(Statas.RED);
-            Player curentPLayer=player_1;
-//            if (i % 2 == 0) {
-//                curentPLayer = player_1;
-//            } else {
-//                curentPLayer = player_2;
-//            }
-            boolean game = true;
-            Triangle[] board = setBoard();
-            display(board);
+        Player curentPLayer=null;
+        if(player_1.firstPlayer){
+            curentPLayer=player_1;
+        }else {
+            curentPLayer=player_2;
+        }
+
+        boolean game = true;
+        Triangle[] board = setBoard();
+        display(board);
 
             try {
                 while (game) {
