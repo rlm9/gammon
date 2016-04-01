@@ -40,15 +40,17 @@ public abstract class Player {
             }
             if (move != null) {
                 move.execute(bord);
-                prepareMess+="("+move.start+"|"+move.end+")";
-                //Main.display(bord);
+                prepareMess+="("+move.start+"|"+move.end+"),";
+                Main.display(bord);
                 move = null;
             }else {
-                prepareMess+="(-1|-1)";
+                prepareMess+="(-1|-1),";
             }
         }
         prepareMess=prepareMess.substring(0,prepareMess.length()-1);
+        prepareMess+=";";
         System.out.println(prepareMess);
+        Main.mess=prepareMess;
         if(bord[getEndIndex(colour)].getPieces()==15){
             return false;
         }
@@ -137,7 +139,9 @@ public abstract class Player {
     }
 
     public ArrayList<Integer> roll(int roll1, int roll2){
+
         ArrayList<Integer> rolls=new ArrayList<>();
+        prepareMess+=(roll1+"-"+roll2+":");
         if(roll1==roll2){
             for(int i=0;i<4;i++){
                 rolls.add(roll1);

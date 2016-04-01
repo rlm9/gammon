@@ -14,6 +14,7 @@ import java.util.logging.SimpleFormatter;
     public class Main {
     public static final Logger log = Logger.getLogger(Main.class.getName());
     public static FileHandler fh;
+    public static String mess;
 
     public static void main(String[] args) {
         //  Player player_1=setPlayer(Statas.WHITE);dfde
@@ -25,9 +26,9 @@ import java.util.logging.SimpleFormatter;
 
         Player curentPLayer=null;
         if(player_1.firstPlayer){
-            curentPLayer=player_1;
-        }else {
             curentPLayer=player_2;
+        }else {
+            curentPLayer=player_1;
         }
 
         boolean game = true;

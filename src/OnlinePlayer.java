@@ -26,7 +26,6 @@ public class OnlinePlayer extends Player {
 
     public OnlinePlayer(Statas colour) {
         super(colour);
-        getMessage();
         String hostName;
         try {
             final String hostname = InetAddress.getLocalHost().getHostName();
@@ -83,7 +82,7 @@ public class OnlinePlayer extends Player {
     }
 
     public int roll() {
-        return 3;
+        return -1;
     }
 
     public Move getMove() {
@@ -97,6 +96,10 @@ public class OnlinePlayer extends Player {
         }
         return move;
     }
+//    public Move evaluate(){
+//
+//
+//    }
 
     public void getMessage() {
         String in = scanner.nextLine();
@@ -117,7 +120,6 @@ public class OnlinePlayer extends Player {
                 System.exit(1);
 
             }
-
 
             String[] parts = in.split("[-:;,_]");
             int roll1 = Integer.parseInt(parts[0]);
@@ -147,6 +149,9 @@ public class OnlinePlayer extends Player {
     }
 
     public ArrayList<Integer> roll(int roll1, int roll2) {
+        if(Main.mess==null){
+
+        }
         return rollsIn;
     }
 
