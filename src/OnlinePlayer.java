@@ -41,17 +41,28 @@ public class OnlinePlayer extends Player {
                 socketServer = new ServerSocket(port);
                 socketServer.setSoTimeout(300000);
                 socket = socketServer.accept();
-
-                System.out.println("Connection Timeout");
-                System.exit(-1);
+                scanner = new Scanner(socket.getInputStream());
+                writer = new PrintWriter(socket.getOutputStream());
+                writer.println(hello);
+                String in = scanner.nextLine();
+                if(in.equals(hello)){
+                    System.out.println("suces 2");
+                }
+                System.out.println("");
 
             } else if (type.equals("client")) {
                 this.colour=Statas.RED;
                 socket = new Socket(hostName, port);
-
+                scanner = new Scanner(socket.getInputStream());
+                writer = new PrintWriter(socket.getOutputStream());
+                String in = scanner.nextLine();
+                if(in.equals(hello)){
+                    System.out.println("suces 1");
+                }
+                System.out.println("in");
+                writer.println(hello);
             }
-            scanner = new Scanner(socket.getInputStream());
-            writer = new PrintWriter(socket.getOutputStream());
+
         }catch (java.net.SocketException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -91,7 +102,7 @@ public class OnlinePlayer extends Player {
         return userIn;
     }
     public int roll(){
-
+return 3;
     }
     public void getMessage(){
         String in = scanner.nextLine();
