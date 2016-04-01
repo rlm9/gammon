@@ -17,6 +17,7 @@ import java.util.logging.SimpleFormatter;
 
     public static void main(String[] args) {
         //  Player player_1=setPlayer(Statas.WHITE);dfde
+        Player online=new OnlinePlayer(Statas.RED);
         Player player_1 = setPlayer(1,Statas.RED);
         Player player_2 = setPlayer(2, Statas.WHITE);
 //            Player player_2= new AiSteve(Statas.RED);
@@ -24,6 +25,7 @@ import java.util.logging.SimpleFormatter;
 //        System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
 //            @Override
 //            public void write(int b) {
+
 //            }
 //        }) {
 //            @Override
