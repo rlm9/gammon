@@ -13,8 +13,8 @@ public class AiAnd extends AiPlayer {
         int max=0;
         int total=0;
         Move best=null;
-        dissRolls(rolls);
-        dissPossMoves(posMoves);
+
+//Standard type priority and closer to start of board
         for(Move move:posMoves){
             total=0;
 
@@ -28,6 +28,7 @@ public class AiAnd extends AiPlayer {
 
         }
         rolls.remove(new Integer(best.roll));
+        System.out.println("And is moving " + best.start + " to " + best.end);
         return best;
     }
 }

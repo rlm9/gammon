@@ -41,34 +41,12 @@ public class Triangle {
 
     public Triangle(int start){
         switch (start){
-//            case 0:
-//                pieces=12;
-//                status=Statas.EMPTY;
-//                break;
-//            case 1:
-//                pieces=1;
-//                status=Statas.RED;
-//                break;
-//            case 2:
-//                pieces=1;
-//                status=Statas.RED;
-//                break;
-//            case 3:
-//                pieces=1;
-//                status=Statas.RED;
-//                break;
-//            case 17:
-//                pieces=3;
-//                status=Statas.RED;
-//                break;
+
             case 1:
                 pieces=2;
                 status=Statas.WHITE;
                 break;
-//            case 4://case 4 if for testing captures
-//                pieces=1;
-//                status=Statas.RED;
-//                break;
+
             case 6:
                 pieces=5;
                 status=Statas.RED;
@@ -93,10 +71,7 @@ public class Triangle {
                 pieces=5;
                 status=Statas.WHITE;
                 break;
-//            case 22:
-//                pieces=1;
-//                status=Statas.WHITE;
-//                break;
+
             case 24:
                 pieces=2;
                 status=Statas.RED;

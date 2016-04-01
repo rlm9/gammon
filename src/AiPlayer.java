@@ -11,36 +11,8 @@ public class AiPlayer extends Player {
         super(colour);
     }
 
-    public Move fevaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls, Triangle[] bord) {
-        int evaluation = 0, bigggest = 0;
-        ArrayList<Move> bestMoves = new ArrayList<>();
-        Move bestMove = null;
-        for (Move move : posMoves) {
-            evaluation = 0;
-            if (move instanceof BearMove) {
-                evaluation += 300;
-            } else if (move instanceof TakeMove) {
-                evaluation += 200;
-            } else {
-                evaluation += 100;
-            }
-            if (evaluation > bigggest) {
-                bigggest = evaluation;
-                bestMoves.clear();
-                bestMoves.add(move);
+    //Default AI class, with methods used by some subclasses
 
-            } else if (evaluation == bigggest) {
-                bestMoves.add(move);
-            }
-
-        }
-        Random random = new Random();
-
-        int rnd = random.nextInt(bestMoves.size());
-        bestMove = bestMoves.get(rnd);
-        rolls.remove(new Integer(bestMove.roll));
-        return bestMove;
-    }
 
     public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls, Triangle[] bord) {
         int evaluation = 0, bigggest = 0;

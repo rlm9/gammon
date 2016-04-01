@@ -27,6 +27,7 @@ public class OnlinePlayer extends Player {
     public OnlinePlayer(Statas colour) {
 
         super(colour);
+        Boolean loop=true;
         String hostName;
         try {
             final String hostname = InetAddress.getLocalHost().getHostName();
@@ -35,23 +36,24 @@ public class OnlinePlayer extends Player {
             System.out.println(ex);
         }
 
-        String[] poss = {"client", "server"};
         String type = "";
-        //type = Main.getString("Are you the client or the server?", poss, "Please enter a valid option");
-        hostName = getString("enter the host you wish to connect to", null, "Please Enter valid input");
-        try {
-            if (hostName.equals("wait")) {
-                setServer();
-            } else {
-                seClinet(hostName);
-            }
+        while (loop) {
+            hostName = getString("enter the host you wish to connect to( or wait to act as a server)", null, "Please Enter valid input");
 
-        } catch (java.net.SocketException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            try {
+                if (hostName.equals("wait")) {
+                    setServer();
+                } else {
+                    seClinet(hostName);
+                }
+                loop=false;
+            } catch (java.net.SocketException e) {
+                // e.printStackTrace();
+                System.out.println(e.getMessage());
+            } catch (java.io.IOException e) {
+                //e.printStackTrace();
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -67,11 +69,7 @@ public class OnlinePlayer extends Player {
                 if (userIn.equals("exit")) {
                     System.exit(1);
                 }
-//                for(String pos:poss){
-//                    if(pos.equals(userIn.toLowerCase())){
-//                        error=false;
-//                    }
-//                }
+
                 error = false;
             } catch (java.util.InputMismatchException e) {
                 System.out.println(e);
@@ -97,10 +95,7 @@ public class OnlinePlayer extends Player {
         }
         return move;
     }
-//    public Move evaluate(){
-//
-//
-//    }
+
 
     public void getMessageIn() {
         String in = scanner.nextLine();
@@ -137,13 +132,6 @@ public class OnlinePlayer extends Player {
                 movesIn.add(move);
             }
 
-//            for (int i = ; i < parts.length; i++) {
-//                parts[i] = parts[i].replaceAll("[()]", "");
-//                String[] moveArray = parts[i].split("\\|");
-//                System.out.println(parts[i]);
-//                move = new Move(Integer.parseInt(moveArray[0]), Integer.parseInt(moveArray[1]));
-//                movesIn.add(move);
-//            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

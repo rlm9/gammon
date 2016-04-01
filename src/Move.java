@@ -15,37 +15,9 @@ public class Move {
     public Move(int start, int end){
         this.start=start;
         this.end=end;
-      //  this.colour=colour;
-      //  this.valid=false;
 
-      /////  this.roll=roll;
     }
-    public boolean validateMove(ArrayList<Move> posMoves, ArrayList<Integer> rolls){
-        for(Move move:posMoves){
-            if(move.start==start&&move.end==end){
-            }
-        }
-
-//        if(bord[start].getStatas()!=colour){
-//            return false;
-//        }
-//        int diff= ((end-start)*colour.getDir());
-//        if(!rolls.contains(diff)){
-//            return false;
-//        }
-//        rolls.remove(diff);
-//        if(!(bord[end].getStatas()==colour||bord[end].getStatas()==Statas.EMPTY)){
-//            if(bord[end].getPieces()!=1){
-//                return false;
-//            }else {
-//
-//            }
-//        }else {
-//
-//        }
-//        return true;
-            return true;
-    }
+//default method executed by all kinds of moves
     public void execute(Triangle[] bord){
         Triangle triangle=bord[start];
         triangle.remove();
@@ -54,6 +26,7 @@ public class Move {
         }
 
     }
+    //code foor unfinsihed sear AI
     public void undo(Triangle[] bord){
         Triangle triangle=bord[start];
         triangle.add();
@@ -61,6 +34,7 @@ public class Move {
 
 
     }
+    //Returns 1 or 24 depending on colour
     public int getEdgeIndex(){
         return (int)(1+(11.5*(colour.getDir()+1)));
     }

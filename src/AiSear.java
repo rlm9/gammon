@@ -30,6 +30,10 @@ public class AiSear extends AiSteve {
 //        }
 //        return true;
 //    }
+
+
+    //unfinished AI, attempted to evaluate whole move, but didn't work
+
     public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls, Triangle[] bord) {
         int max=0;
         int total=0;

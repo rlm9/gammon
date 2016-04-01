@@ -13,7 +13,7 @@ public class AiBob extends AiPlayer {
         int max=0;
         int total=0;
         Move best=null;
-//
+//Again standard priority with furthest from board, which was much more effective than closest to from And
         for(Move move:posMoves){
             total=0;
 

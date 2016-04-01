@@ -7,10 +7,10 @@ public class NormalMove extends Move {
         this.colour=colour;
         this.roll=roll;
     }
+    //Finished a standard move after super
+
     public void execute(Triangle[] bord){
-      //  System.out.println(bord[1].getPieces());
         super.execute(bord);
-      //  System.out.println(bord[1].getPieces());
         Triangle triangle=bord[end];
         triangle.add();
         triangle.setStatus(colour);

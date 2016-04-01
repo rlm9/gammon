@@ -7,6 +7,9 @@ public class BearMove extends NormalMove {
 //        this.colour=colour;
 //        this.roll = roll;
 //    }
+
+    //Functionally the same to normal, different subclass for AI evaluation
+
     public BearMove(int start, int end, Statas colour,int roll){
         super(start,end,colour,roll);
     }

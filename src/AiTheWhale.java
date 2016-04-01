@@ -9,6 +9,8 @@ public class AiTheWhale extends AiPlayer {
     public AiTheWhale(Statas colour){
         super(colour);
     }
+
+
     public Move evaluate(ArrayList<Move> posMoves, ArrayList<Integer> rolls, Triangle[] bord) {
         int max=0;
         int total=0;
@@ -32,6 +34,7 @@ public class AiTheWhale extends AiPlayer {
         }
         best=rndBest(bestMoves);
         rolls.remove(new Integer(best.roll));
+        System.out.println("TheWhale is moving " + best.start + " to " + best.end);
         return best;
     }
 }

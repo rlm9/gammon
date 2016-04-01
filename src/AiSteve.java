@@ -31,6 +31,7 @@ public class AiSteve extends AiPlayer {
         }
 //        best=rndBest(bestMoves);
         rolls.remove(new Integer(best.roll));
+        System.out.println("Steve is moving " + best.start + " to " + best.end);
         return best;
     }
     public int evaluateValue(Move move,Triangle[] bord){
@@ -53,6 +54,7 @@ public class AiSteve extends AiPlayer {
             total += 40;
         }
         total-=disFrom(getEndIndex(colour.getopp()),move.start);
+
         return total;
     }
 

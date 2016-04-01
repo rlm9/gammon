@@ -15,6 +15,10 @@ public class AiPeter extends Player {
         int count = 0;
         int evaluation = 0;
         int bigggest = 0;
+
+
+        //Legacy AI no longer in use
+
         for (Move move : posMoves) {
             evaluation = 0;
 //            count+=colour.getDir();

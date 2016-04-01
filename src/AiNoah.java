@@ -14,6 +14,7 @@ public class AiNoah extends AiPlayer {
         int total=0;
         Move best=null;
         ArrayList<Move> bestMoves=new ArrayList<>();
+        //Type priority with neutral board distance
         for(Move move:posMoves){
             total=0;
 
@@ -29,6 +30,7 @@ public class AiNoah extends AiPlayer {
         }
         best=rndBest(bestMoves);
         rolls.remove(new Integer(best.roll));
+        System.out.println("Noah is moving " + best.start + " to " + best.end);
         return best;
     }
 }
