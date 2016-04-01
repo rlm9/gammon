@@ -17,9 +17,11 @@ import java.util.logging.SimpleFormatter;
 
     public static void main(String[] args) {
         //  Player player_1=setPlayer(Statas.WHITE);dfde
-        Player online=new OnlinePlayer(Statas.RED);
-        Player player_1 = setPlayer(1,Statas.RED);
-        Player player_2 = setPlayer(2, Statas.WHITE);
+        //Player online=new OnlinePlayer(Statas.RED);
+        String [] options1={"ai", "user", "online"};
+        Player player_1 = setPlayer(1,Statas.RED,options1);
+        String[] options2={"ai", "user"};
+        Player player_2 = setPlayer(2, player_1.colour.getopp(),options2);
 //            Player player_2= new AiSteve(Statas.RED);
 //            Player player_1= new UserPlayer(Statas.WHITE);
 //        System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
@@ -217,9 +219,8 @@ import java.util.logging.SimpleFormatter;
         return bord;
     }
 
-    public static Player setPlayer(int num,Statas colour) {
+    public static Player setPlayer(int num,Statas colour,String[] types) {
         String type;
-        String[] types = {"ai", "user", "online"};
         type = getString("What is Player " + num + "?\n AI, User or Online?", types,"Please Enter a Valid type");
         if(type.equals("user")){
             return new UserPlayer(colour);
