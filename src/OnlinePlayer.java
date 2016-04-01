@@ -88,6 +88,10 @@ return 3;
         socket = new Socket(hostName, port);
         scanner = new Scanner(socket.getInputStream());
         writer = new PrintWriter(socket.getOutputStream(),true);
+        int test=(socket.getInputStream().read());
+        System.out.println(test);
+
+
         String in = scanner.nextLine();
         if(in.equals(hello)){
             System.out.println("suces 1");
