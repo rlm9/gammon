@@ -149,10 +149,19 @@ public class OnlinePlayer extends Player {
     }
 
     public ArrayList<Integer> roll(int roll1, int roll2) {
-        if(Main.mess==null){
-
+        if(Main.mess !=null){
+            sendMessage();
         }
+        getMessage();
         return rollsIn;
+    }
+
+    public void sendMessage(){
+        try{
+            writer.println(Main.mess);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void seClinet(String hostName) throws java.io.IOException {

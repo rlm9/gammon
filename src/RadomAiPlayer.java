@@ -18,6 +18,5 @@ public class RadomAiPlayer extends Player {
         rolls.remove(new Integer(move.roll));
         return posMoves.get(rnd);
 
-
     }
 }
