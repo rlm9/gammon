@@ -116,12 +116,6 @@ return 3;
         System.out.println(test);
         marker.reset();
         in = scanner.nextLine();
-
-
-
-
-
-
         System.out.println(in);
         if(in.equals(hello)){
             System.out.println("suces 1");
@@ -132,16 +126,38 @@ return 3;
     public void setServer()throws java.io.IOException {
         this.colour=Statas.WHITE;
         socketServer = new ServerSocket(port);
-        // socketServer.setSoTimeout(300000);
         socket = socketServer.accept();
-        System.out.println("woop");
-        scanner = new Scanner(socket.getInputStream());
+        BufferedInputStream marker=new BufferedInputStream(socket.getInputStream());
+        scanner=new Scanner(marker);
         writer = new PrintWriter(socket.getOutputStream(),true);
-        writer.println(hello);
         String in = scanner.nextLine();
-        if(in.equals(hello)){
-            System.out.println("suces 2");
+        if(!in.equals(hello)){
+            throw new IOException("Client did not adhere to protocol");
         }
+        writer.println(hello);
+        in = scanner.nextLine();
+        if(!in.equals(newgame)){
+            throw new IOException("Client did not adhere to protocol");
+        }
+        writer.println(ready);
+        marker.mark(1);
+        int test=marker.read();
+        if(test==1){
+            System.out.println("will be pass");
+        }
+        System.out.println(scanner.nextLine());
+
+        System.out.println(test);
+        marker.reset();
+        in = scanner.nextLine();
+        System.out.println(in);
+
+
+
+
+
+
+
         System.out.println("");
     }
 }
